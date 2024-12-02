@@ -34,7 +34,7 @@ namespace WebExcellence.Api.BooksClient.UnitTests
             var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(BooksClientPolicies.Http_Retry_Policy);
 
             // Act
-            var response = await policy.ExecuteAsync(() => httpClient.GetAsync("http://test.com"));
+            var response = await policy.ExecuteAsync(() => httpClient.GetAsync("http://wonthit.never:0"));
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -68,7 +68,7 @@ namespace WebExcellence.Api.BooksClient.UnitTests
             var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(BooksClientPolicies.Http_Retry_Policy);
 
             // Act
-            var response = await policy.ExecuteAsync(() => httpClient.GetAsync("http://test.com"));
+            var response = await policy.ExecuteAsync(() => httpClient.GetAsync("http://wonthit.never:0"));
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);

@@ -10,6 +10,7 @@ using WebExcellence.Api.BooksClient;
 
 namespace WebExcellence.Api.BooksClient.IntergrationTests
 {
+
     public class Startup
     {
         public void ConfigureHost(IHostBuilder hostBuilder)
@@ -31,7 +32,10 @@ namespace WebExcellence.Api.BooksClient.IntergrationTests
                 {
                     throw new InvalidOperationException("API_BASE_URL is required");
                 }
-                services.AddReliableBooksClient(url); // Simulate production injection
+                var handler = new TestHttpMessageHandler();
+                services.AddSingleton(handler);
+                var client = services.AddReliableBooksHttpClient(url); // Simulate production injection
+                client.AddHttpMessageHandler(() => handler);
             });
         }
     }
