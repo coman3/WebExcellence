@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "todos",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "API_BASE_URL": "https://digitalcodingtest.bupa.com.au"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5250"
@@ -15,7 +16,8 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "ASPNETCORE_HTTP_PORTS": "8080"
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "API_BASE_URL": "https://digitalcodingtest.bupa.com.au"
       },
       "publishAllPorts": true,
       "useSSL": false

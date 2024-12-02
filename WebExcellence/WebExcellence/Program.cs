@@ -1,35 +1,35 @@
 using System.Text.Json.Serialization;
+using WebExcellence.Api.BooksClient;
+using WebExcellence.Application.Configuration;
+using WebExcellence.Application.Models;
+using WebExcellence.Application.Services;
+using WebExcellence.Application.Services.Interfaces;
+using WebExcellence.Features.Books;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
+    options.SerializerOptions.TypeInfoResolver = WebExcellence.JsonContext.Default;
 });
+
+builder.Services.Configure<AgeCategoryOptions>((options) => {
+    builder.Configuration.GetSection("AgeCategories").Bind(options);
+    options.ValidateCategories();
+});
+
+var url = builder.Configuration["API_BASE_URL"];
+if (string.IsNullOrEmpty(url))
+{
+    throw new InvalidOperationException("API_BASE_URL is required");
+}
+
+builder.Services.AddReliableBooksHttpClient(url);
+builder.Services.AddTransient<IBookService, BookService>();
 
 var app = builder.Build();
 
-var sampleTodos = new Todo[] {
-    new(1, "Walk the dog"),
-    new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
-    new(3, "Do the laundry", DateOnly.FromDateTime(DateTime.Now.AddDays(1))),
-    new(4, "Clean the bathroom"),
-    new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
-};
-
-var todosApi = app.MapGroup("/todos");
-todosApi.MapGet("/", () => sampleTodos);
-todosApi.MapGet("/{id}", (int id) =>
-    sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
-        ? Results.Ok(todo)
-        : Results.NotFound());
+app.RegisterBooksEndpoints();
 
 app.Run();
-
-public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
-
-[JsonSerializable(typeof(Todo[]))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
-
-}
