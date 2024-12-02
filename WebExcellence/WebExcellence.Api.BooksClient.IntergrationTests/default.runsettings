@@ -1,0 +1,7 @@
+<RunSettings>
+  <RunConfiguration>
+      <EnvironmentVariables>
+          <API_BASE_URL>https://digitalcodingtest.bupa.com.au</API_BASE_URL>
+      </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>

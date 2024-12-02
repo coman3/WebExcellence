@@ -1,0 +1,57 @@
+﻿# External API definition for the Bupa Coding Test API
+## Extended from source (https://digitalcodingtest.bupa.com.au/swagger/v1/swagger.json)
+## * Requested API specfication to be updated at source, but expected timeframe to far (03/2025)
+## * Added response schema for successful retrieval of book owners (GET /api/v1/bookowners)
+openapi: 3.0.0
+info:
+  title: Bupa Coding Test API
+  version: v1
+  description: An ASP.NET Core Web API for retrieving Owners of Book Lists
+servers:
+  - url: 'https://digitalcodingtest.bupa.com.au'
+paths:
+  /api/v1/bookowners:
+    get:
+      summary: Get book owners
+      tags:
+        - Book Owners
+      responses:
+        '200':
+          description: Successful retrieval of book owners
+          content:
+            application/json:
+              schema:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/BookOwner'
+components:
+  schemas:
+    BookOwner:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the book owner
+        age:
+          type: integer
+          format: int32
+          description: The age of the book owner
+        books:
+          type: array
+          description: The list of books owned by the owner
+          items:
+            $ref: '#/components/schemas/Book'
+    Book:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the book
+        type:
+          type: string
+          description: The type of the book (e.g., Hardcover, Paperback, Ebook)
+          enum:
+            - Hardcover
+            - Paperback
+            - Ebook
