@@ -16,3 +16,6 @@ Notable design decisions:
     * Requests must be scoped and traced on a per-request basis
     * Request logs must be attached to scope
     * Trace IDs must be sent externally to API's that support it.
+ * Use of single project where code can not be shared
+    * Project size is expected to be small, keep .NET project scope as small as possible until further notice.
+    * Resilience pipelines for external API's must be defined as part of that project for guaranteed API usage consistency.
