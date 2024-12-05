@@ -1,0 +1,76 @@
+﻿@using WebExcellence.Aspire.Web.Services
+@using WebExcellence.Domain.Models
+@page "/books"
+@inject BookService BookService
+@rendermode InteractiveServer
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Books by Category</h1>
+
+    <div class="mb-4">
+        <label for="bookType" class="block text-sm font-medium text-gray-700">Filter by Book Type:</label>
+        <select id="bookType" @onchange="OnBookTypeChanged" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <option value="">All</option>
+            <option value="@((int)BookType.Hardcover)">Hardcover</option>
+            <option value="@((int)BookType.Paperback)">Paperback</option>
+            <option value="@((int)BookType.Ebook)">Ebook</option>
+        </select>
+    </div>
+
+    @if (bookCategories == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var category in bookCategories)
+        {
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">@category.Name</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach (var book in category.Books ?? new List<BookItem>())
+                    {
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h3 class="text-xl font-semibold mb-2">@book.Name</h3>
+                            <p class="text-gray-600 mb-2">Type: @book.Type</p>
+                            @if (book.Author != null)
+                            {
+                                <p class="text-gray-600">Author: @book.Author.Name (@book.Author.Age years old)</p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private List<BookCategory>? bookCategories;
+    private BookType? selectedBookType;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadBooks();
+    }
+
+    private async Task OnBookTypeChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int bookTypeValue))
+        {
+            selectedBookType = (BookType)bookTypeValue;
+        }
+        else
+        {
+            selectedBookType = null;
+        }
+        
+        await LoadBooks();
+    }
+
+    private async Task LoadBooks()
+    {
+        bookCategories = null; // reset so we always show loading...
+        bookCategories = await BookService.GetBooksAsync(selectedBookType);
+    }
+}

@@ -1,9 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WebExcellence.Application.Models
+namespace WebExcellence.Domain.Models
 {
-    [JsonSerializable(typeof(BookCategory))]
-    [JsonSerializable(typeof(List<BookCategory>))]
     public class BookCategory
     {
         public string? Name { get; set; }

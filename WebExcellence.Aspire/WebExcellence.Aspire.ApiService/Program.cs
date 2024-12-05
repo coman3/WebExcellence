@@ -7,7 +7,6 @@ using WebExcellence.Aspire.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add service defaults & Aspire components.
 builder.AddServiceDefaults();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -15,7 +14,6 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.TypeInfoResolver = WebExcellence.JsonContext.Default;
 });
 
-// Add services to the container.
 builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -40,10 +38,8 @@ app.RegisterBooksEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 
 app.MapDefaultEndpoints();
-
 
 app.Run();

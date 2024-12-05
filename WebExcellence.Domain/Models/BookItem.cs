@@ -1,9 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using WebExcellence.External.Api.BooksClient;
 
-namespace WebExcellence.Application.Models
+namespace WebExcellence.Domain.Models
 {
-    [JsonSerializable(typeof(BookItem))]
     public class BookItem
     {
         public string? Name { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using WebExcellence.Application.Configuration;
-using WebExcellence.Application.Models;
 using WebExcellence.Application.Services.Interfaces;
+using WebExcellence.Domain.Models;
 using WebExcellence.External.Api.BooksClient;
 
 namespace WebExcellence.Application.Services
@@ -16,7 +16,7 @@ namespace WebExcellence.Application.Services
 
         }
 
-        public async Task<List<BookCategory>> GetBooksCategorizedByAgeAsync(BookType? typeFilter)
+        public async Task<List<BookCategory>> GetBooksCategorizedByAgeAsync(Domain.Models.BookType? typeFilter)
         {
             ICollection<BookOwner>? bookOwners;
 
@@ -62,12 +62,13 @@ namespace WebExcellence.Application.Services
                 {
                     foreach (var book in owner.Books)
                     {
-                        if (typeFilter == null || book.Type == typeFilter)
+                        var bookType = Enum.Parse<Domain.Models.BookType>(book.Type.ToString(), true); // Match based on name, not integer value;
+                        if (typeFilter == null || bookType == typeFilter)
                         {
                             value.Add(new BookItem
                             {
                                 Name = book.Name,
-                                Type = book.Type,
+                                Type = bookType,
                                 Author = new BookAuthor { Name = owner.Name, Age = owner.Age }
                             });
                         }

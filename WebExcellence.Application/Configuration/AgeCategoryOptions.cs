@@ -1,4 +1,4 @@
-﻿using WebExcellence.Application.Models;
+﻿using WebExcellence.Domain.Models;
 
 namespace WebExcellence.Application.Configuration
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using WebExcellence.Application.Services.Interfaces;
-using WebExcellence.External.Api.BooksClient;
+using WebExcellence.Domain.Models;
 
 namespace WebExcellence.Aspire.ApiService.Features.Books
 {

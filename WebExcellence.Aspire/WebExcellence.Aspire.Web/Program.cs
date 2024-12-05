@@ -1,23 +1,24 @@
 using WebExcellence.Aspire.ServiceDefaults;
 using WebExcellence.Aspire.Web.Components;
+using WebExcellence.Aspire.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add service defaults & Aspire components.
 builder.AddServiceDefaults();
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddOutputCache();
+
+builder.Services.AddHttpClient<BookService>(client => client.BaseAddress = new("http://apiservice"));
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // The default HSTS value is 30 days.
     app.UseHsts();
 }
 

@@ -41,6 +41,63 @@ namespace WebExcellence.Api.BooksClient.UnitTests
             retryCount.Should().Be(3); // Should have retried twice
         }
 
+
+        [Fact]
+        public async Task Parse_Weird_Case()
+        {
+            // Arrange
+            var retryCount = 0;
+            var handlerMock = new Mock<HttpMessageHandler>();
+            handlerMock.Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(() =>
+                {
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new StringContent(@"
+[
+  {
+    ""name"": ""Charles"",
+    ""AGE"": 17,
+    ""BOOKS"": [
+      {
+        ""NAME"": ""Little Red Riding Hood"",
+        ""TYPE"": ""Hardcover""
+      },
+      {
+        ""NAME"": ""The Hobbit"",
+        ""TYPE"": ""Ebook""
+      }
+    ]
+  },
+  {
+    ""name"": ""William"",
+    ""AGE"": 15,
+    ""BOOKS"": [
+      {
+        ""NAME"": ""Great Expectations"",
+        ""TYPE"": ""Hardcover""
+      }
+    ]
+  }
+]", new System.Net.Http.Headers.MediaTypeHeaderValue("application/json"))
+                    };
+                });
+
+
+            var httpClient = new ReliableBooksClient(new HttpClient(handlerMock.Object), new PolicyRegistry().AddBookClientPolicies());
+
+            // Act
+            var response = await httpClient.BookownersAsync();
+
+            // Assert
+            response.Should().HaveCount(1);
+        }
+
+
+
+
+
         [Fact]
         public async Task Http_Retry_Policy_RetriesOnTransient_ToManyRequests_Errors()
         {

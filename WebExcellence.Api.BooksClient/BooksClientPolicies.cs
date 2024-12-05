@@ -21,7 +21,7 @@ namespace WebExcellence.Api.BooksClient
         internal static IAsyncPolicy<ICollection<BookOwner>> BooksOwnerCollection_NotNull_Retry()
         {
             return Policy<ICollection<BookOwner>>
-                .HandleResult(result => result == null)
+                .HandleResult(result => result == null || result.Count < 1)
                 .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
         }
 

@@ -8,7 +8,7 @@ namespace WebExcellence.Api.BooksClient
     /// Resilient BooksClient that wraps the base <see cref="SwaggerBooksClient"/> with a retry
     /// policy ensuring safe responses from the unreliable source.
     /// </summary>
-    public sealed class ReliableBooksClient : SwaggerBooksClient
+    public partial class ReliableBooksClient : SwaggerBooksClient
     {
         private readonly IPolicyRegistry<string> registry;
 
@@ -16,8 +16,12 @@ namespace WebExcellence.Api.BooksClient
         public ReliableBooksClient(HttpClient httpClient, IPolicyRegistry<string> registry) : base(httpClient)
         {
             this.registry = registry;
-            // TODO: Come in here and figure out full property name case insestivity... For now, just ignore it and return broken responses until we can fix it.
+
+            // Sometimes this API returns upper case property names, so we need to use a custom
+            // contract resolver to convert all property names to title case
+            JsonSerializerSettings.ContractResolver = new CaseConverterContractResolver();
         }
+
 
         /// <summary>
         /// Wraps the base BookownersAsync method with a retry policy ensuring that the result is not null.

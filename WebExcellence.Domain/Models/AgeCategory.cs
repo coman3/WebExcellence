@@ -1,8 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WebExcellence.Application.Models
+namespace WebExcellence.Domain.Models
 {
-    [JsonSerializable(typeof(AgeCategory))]
     public class AgeCategory
     {
         public string Name { get; set; } = "";

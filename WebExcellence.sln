@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence", "WebExcellence\WebExcellence.csproj", "{7C7CBF0E-6C11-4C7E-8E25-4CB8D713E0EA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.External.Api.BooksClient", "WebExcellence.External.Api.BooksClient\WebExcellence.External.Api.BooksClient.csproj", "{118A8744-8D6A-4A91-93F5-83739D8F1B4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Api.BooksClient.IntergrationTests", "WebExcellence.Api.BooksClient.IntergrationTests\WebExcellence.Api.BooksClient.IntergrationTests.csproj", "{4F117CF9-F63A-42DA-9EA8-15C90C4A2338}"
@@ -21,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Application.UnitTests", "WebExcellence.Application.UnitTests\WebExcellence.Application.UnitTests.csproj", "{BEC31324-B6A5-44FA-AABC-096924F40822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebExcellence.Aspire.AppHost", "WebExcellence.Aspire\WebExcellence.Aspire.AppHost\WebExcellence.Aspire.AppHost.csproj", "{3059337A-F6EB-4A2F-940F-F7B209B4E06F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Aspire.AppHost", "WebExcellence.Aspire\WebExcellence.Aspire.AppHost\WebExcellence.Aspire.AppHost.csproj", "{3059337A-F6EB-4A2F-940F-F7B209B4E06F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Aspire.ServiceDefaults", "WebExcellence.Aspire\WebExcellence.Aspire.ServiceDefaults\WebExcellence.Aspire.ServiceDefaults.csproj", "{050B988B-5BE3-4A70-B57B-E76FDD86C439}"
 EndProject
@@ -31,16 +29,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Aspire.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebExcellence.Aspire.Tests", "WebExcellence.Aspire\WebExcellence.Aspire.Tests\WebExcellence.Aspire.Tests.csproj", "{10B6500C-85F1-4FC9-9E59-CC942EB3BF2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebExcellence.Domain", "WebExcellence.Domain\WebExcellence.Domain.csproj", "{3B2AEA82-D897-4D83-9B1B-7E9A79EE3519}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C7CBF0E-6C11-4C7E-8E25-4CB8D713E0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C7CBF0E-6C11-4C7E-8E25-4CB8D713E0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C7CBF0E-6C11-4C7E-8E25-4CB8D713E0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C7CBF0E-6C11-4C7E-8E25-4CB8D713E0EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{118A8744-8D6A-4A91-93F5-83739D8F1B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{118A8744-8D6A-4A91-93F5-83739D8F1B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118A8744-8D6A-4A91-93F5-83739D8F1B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,6 +81,10 @@ Global
 		{10B6500C-85F1-4FC9-9E59-CC942EB3BF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B6500C-85F1-4FC9-9E59-CC942EB3BF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B6500C-85F1-4FC9-9E59-CC942EB3BF2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2AEA82-D897-4D83-9B1B-7E9A79EE3519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2AEA82-D897-4D83-9B1B-7E9A79EE3519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2AEA82-D897-4D83-9B1B-7E9A79EE3519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2AEA82-D897-4D83-9B1B-7E9A79EE3519}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
