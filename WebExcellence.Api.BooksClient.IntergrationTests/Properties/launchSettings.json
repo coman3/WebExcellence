@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebExcellence.External.Api.BooksClient.IntergrationTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "API_BASE_URL": "https://digitalcodingtest.bupa.com.au"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+﻿@page "/"
+
+<PageTitle>Web Excellence - A ultra modern .NET version</PageTitle>
+
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Problem Overview</h2>
+    <p class="mb-4">Create an application that fetches book data from an API, categorizes books by owner's age (Adult/Child), and displays them in alphabetical order. 
+        See more <a class="underline" href="https://digitalcodingtest.bupa.com.au/engineeringexcellence/">here</a>.</p>
+</section>
+
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Points of Note</h2>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>This is hosted in south east asia, so its going to be a bit slow, puerly because i can host it for free in this region...</li>
+    </ul>
+</section>
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Proposed Solution</h2>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Develop a blazor interactive based frontend application</li>
+        <li>Implement a .NET wrapper backend to handle API requests and transpose data</li>
+        <li>Implement responsive design using Tailwind CSS</li>
+        <li>Intergrate .NET Aspire for ease of deployment and development</li>
+        <li>Deploy the application on Azure cloud platform using container apps.</li>
+        <li>Leverage Aspire for top quality runtime observability</li>
+    </ul>
+</section>
+
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Known Issues / Not my best</h2>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Sometimes, for no apparent reason the api returns an empty array?</li>
+        <li>Lots of generaly weird placement of classes and services across the application - mostly good, but there is a couple of cases where i put it in the "too hard bucket" for a demonstration, such as the use of "domain" and "application being very loose..."</li>
+        <li>Services injection is a little jank, not too bad, but there is alot of duplicated code here</li>
+        <li>There is no specific error handling in the application minus the Polly policies, this is a big no no - no time for perfect projects here</li>
+        <li>Polly implementation is a little rough around the edges, would prefer to use their new v8 API, but simply havent used it enough to get it going in this timeframe</li>
+        <li>No authentication - simply ran out of time to add this in, the configuration between azure b2c (which i hate) and keycloak + aspire is just too time consuming for a small project like this.</li>
+        <li>I mean, this isnt really a UI.... It works but it could look A LOT better.</li>
+    </ul>
+</section>
+
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Key Assumptions</h2>
+    <ul class="list-disc pl-6 space-y-2">
+        <li>Given the API is dynamic on its responses (sometimes returning fewer or more books) i have simply assumed that call caching on this endpoint is not expected behaviour.</li>
+        <li>I have assumed that the API will eventually return a correct response despite its unreliability.</li>
+        <li>Book type is hardcoded as a known enum, and rarely changes. Otherwise there would be a get book types endpoint or similar.</li>
+        <li>Diferences between json property names "name" and "NAME" are not important - ignore case on json properties.</li>
+    </ul>
+</section>
